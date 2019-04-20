@@ -30,6 +30,6 @@ app.use(controllerss);
 var host = config.get('server.host');
 var port = config.get('server.post');
 
-app.listen(port, host, function() {
+app.listen(process.env.PORT || port, function() {
     console.log("server is running on port: ", port);
 });
