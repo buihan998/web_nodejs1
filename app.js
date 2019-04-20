@@ -1,13 +1,35 @@
 var express = require('express');
+var config = require('config');
+var bodyParser = require('body-parser');
+var session = require('express-session');
 
-var app =express();
+var app = express();
+var http = require('http').Server(app);
 
-app.set('views', __dirname + '/views');
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.set('trust proxy', 1);
+app.use(session({
+    secret: config.get('secret_key'),
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false }
+}))
+
+app.set('views', __dirname + "/apps/views");
 app.set('view engine', 'ejs');
 
-var view = require(__dirname + '/apps');
-app.use(view);
+//satic folder
+app.use('/static', express.static(__dirname + '/public'));
 
-var server = app.listen( process.env.PORT || 3333, function() {
-    console.log("server is running on port: ", 3333);
+var controllerss = require(__dirname + '/apps/controllers');
+
+app.use(controllerss);
+
+var host = config.get('server.host');
+var port = config.get('server.post');
+
+app.listen(port, host, function() {
+    console.log("server is running on port: ", port);
 });
