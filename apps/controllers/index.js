@@ -20,7 +20,7 @@ router.get('/', function(req, res) {
     //     console.log(user)
     // })
 
-    res.render("Home");
+    res.render("Hello");
 });
 
 
