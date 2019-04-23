@@ -3,15 +3,5 @@
         "host": "localhost",
         "post": 3333
     },
-    "mysql": {
-        "host": "localhost",
-        "port": 3306,
-        "database": "blog",
-        "user": "root",
-        "password": ""
-    },
-    "mongodb": {
-        "url": "mongodb://127.0.0.1:27017/mydb"
-    },
     "secret_key": "secretkey"
 }
